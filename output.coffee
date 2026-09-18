@@ -27,6 +27,8 @@ parseInput = (input) ->
 
     answer = match[1]
 
+    console.log "answer:", answer
+
     line = line.replace(/_([^_]+)_/, "_________")
 
     flashcards.push(
@@ -56,6 +58,8 @@ flashcards.forEach ((flashcard) ->
 iterator = 0
 
 handleNextFlashcard = ->
+  flashcardAnswer = document.getElementById('flashcard-answer')
+
   flashcard = flashcards[iterator]
 
   flashcardQuestion = document.getElementById('flashcard-question')
@@ -72,26 +76,29 @@ handleNextFlashcard = ->
   # check if a flashcards is currently being displayed
   if flashcardQuestion == null
     flashcardsDiv.appendChild(h3)
+    flashcardsDiv.removeChild(flashcardAnswer) if flashcardAnswer
     iterator += 1
     return
 
   flashcardsDiv.replaceChild(h3, flashcardQuestion) # if the flashcard isn't the first flashcard
+  flashcardsDiv.removeChild(flashcardAnswer) if flashcardAnswer # remove the answer
   iterator += 1
 
-handleFlippingFlashcard = ->
-  flashcard = flashcards[iterator]
 
+handleFlippingFlashcard = ->
   flashcardAnswer = document.getElementById('flashcard-answer')
+  flashcard = flashcards[iterator - 1]
+
 
   h3 = document.createElement('h3')
   h3.textContent = flashcard.answer
   h3.id = 'flashcard-answer'
 
   if flashcardAnswer == null
-    document.body.appendChild(h3)
+    flashcardsDiv.appendChild(h3)
     return
 
-  document.body.replaceChild(h3, flashcardAnswer)
+  flashcardsDiv.replaceChild(h3, flashcardAnswer)
 
 
 
@@ -99,6 +106,7 @@ nextFlashcard.addEventListener 'click', ->
   handleNextFlashcard()
 
 flipFlashcard.addEventListener 'click', ->
+  handleFlippingFlashcard()
 
 nextFlashcard.click() # load the first flashcard automatically
 

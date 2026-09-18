@@ -30,6 +30,7 @@
         return;
       }
       answer = match[1];
+      console.log("answer:", answer);
       line = line.replace(/_([^_]+)_/, "_________");
       return flashcards.push({
         question: line,
@@ -60,7 +61,8 @@
   iterator = 0;
 
   handleNextFlashcard = function() {
-    var flashcard, flashcardQuestion, h3;
+    var flashcard, flashcardAnswer, flashcardQuestion, h3;
+    flashcardAnswer = document.getElementById('flashcard-answer');
     flashcard = flashcards[iterator];
     flashcardQuestion = document.getElementById('flashcard-question');
     h3 = document.createElement('h3');
@@ -73,32 +75,40 @@
     // check if a flashcards is currently being displayed
     if (flashcardQuestion === null) {
       flashcardsDiv.appendChild(h3);
+      if (flashcardAnswer) {
+        flashcardsDiv.removeChild(flashcardAnswer);
+      }
       iterator += 1;
       return;
     }
     flashcardsDiv.replaceChild(h3, flashcardQuestion); // if the flashcard isn't the first flashcard
+    if (flashcardAnswer) { // remove the answer
+      flashcardsDiv.removeChild(flashcardAnswer);
+    }
     return iterator += 1;
   };
 
   handleFlippingFlashcard = function() {
     var flashcard, flashcardAnswer, h3;
-    flashcard = flashcards[iterator];
     flashcardAnswer = document.getElementById('flashcard-answer');
+    flashcard = flashcards[iterator - 1];
     h3 = document.createElement('h3');
     h3.textContent = flashcard.answer;
     h3.id = 'flashcard-answer';
     if (flashcardAnswer === null) {
-      document.body.appendChild(h3);
+      flashcardsDiv.appendChild(h3);
       return;
     }
-    return document.body.replaceChild(h3, flashcardAnswer);
+    return flashcardsDiv.replaceChild(h3, flashcardAnswer);
   };
 
   nextFlashcard.addEventListener('click', function() {
     return handleNextFlashcard();
   });
 
-  flipFlashcard.addEventListener('click', function() {});
+  flipFlashcard.addEventListener('click', function() {
+    return handleFlippingFlashcard();
+  });
 
   nextFlashcard.click(); // load the first flashcard automatically
 
