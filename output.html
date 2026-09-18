@@ -3,28 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Your flashcards</title>
+
+    <link rel="stylesheet" href="output.css">
 </head>
 <body>
 
-<button onclick="window.location.href='index.html'">Back to homepage</button>
+<div id="everything">
+    <button onclick="window.location.href='index.html'">Back to homepage</button>
 
-<h2>
-  Your flashcards:
-</h2>
+    <h2>
+        Your flashcards:
+    </h2>
 
-<div id="content-container">
+    <div id="content-container">
 
-    <div id="flashcards">
+        <div id="flashcards">
+        </div>
+
+        <button id="flip-flashcard">Flip flashcard/see answer</button>
+
+        <button id="next-flashcard">Next flashcard</button>
     </div>
-
-    <button id="flip-flashcard">Flip flashcard/see answer</button>
-
-    <br>
-    <br>
-
-    <button id="next-flashcard">Next flashcard</button>
 </div>
 
 <script src="output.js"></script>
+
 </body>
 </html>

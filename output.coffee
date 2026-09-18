@@ -7,6 +7,7 @@ nextFlashcard = document.getElementById('next-flashcard')
 printMessage = (message) ->
   h3 = document.createElement('h3')
   h3.textContent = message
+  h3.style = "display: flex; flex-direction: column; align-items: center"
 
   document.body.appendChild(h3)
 

@@ -12,6 +12,7 @@
     var h3;
     h3 = document.createElement('h3');
     h3.textContent = message;
+    h3.style = "display: flex; flex-direction: column; align-items: center";
     document.body.appendChild(h3);
     setTimeout((function() {
       return document.body.removeChild(h3);
