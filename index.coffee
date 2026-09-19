@@ -38,6 +38,8 @@ handleSubmitEvent = ->
 
   if useCapitalizationCheckbox.checked
     sessionStorage.setItem('use-capitalization-for-answers', 'true')
+  else
+    sessionStorage.setItem('use-capitalization-for-answers', 'false')
 
   sessionStorage.setItem('input', rawTextField.value)
 
@@ -81,8 +83,8 @@ fileInput.addEventListener 'change', (event)->
 
   extension = files[0].name.split('.').pop()
 
-  if extension isnt 'txt'
-    alert "Beaufort only supports .txt files at this time."
+  unless extension in ['txt', 'md']
+    alert "Beaufort only supports plain text (.txt) and Markdown (.md) files at this time."
     return
 
   try
@@ -91,6 +93,9 @@ fileInput.addEventListener 'change', (event)->
     fileContents = await file.text()
 
     sessionStorage.setItem('input', fileContents)
+
+    if extension is 'md'
+      sessionStorage.setItem('input-is-markdown', 'true')
 
     window.location.href='output.html'
 

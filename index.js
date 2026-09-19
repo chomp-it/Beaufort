@@ -41,6 +41,8 @@
     }
     if (useCapitalizationCheckbox.checked) {
       sessionStorage.setItem('use-capitalization-for-answers', 'true');
+    } else {
+      sessionStorage.setItem('use-capitalization-for-answers', 'false');
     }
     sessionStorage.setItem('input', rawTextField.value);
     return window.location.href = 'output.html';
@@ -80,14 +82,17 @@
       return;
     }
     extension = files[0].name.split('.').pop();
-    if (extension !== 'txt') {
-      alert("Beaufort only supports .txt files at this time.");
+    if (extension !== 'txt' && extension !== 'md') {
+      alert("Beaufort only supports plain text (.txt) and Markdown (.md) files at this time.");
       return;
     }
     try {
       file = files[0];
       fileContents = (await file.text());
       sessionStorage.setItem('input', fileContents);
+      if (extension === 'md') {
+        sessionStorage.setItem('input-is-markdown', 'true');
+      }
       return window.location.href = 'output.html';
     } catch (error1) {
       error = error1;

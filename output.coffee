@@ -35,7 +35,9 @@ parseInput = (input) ->
 
     answer = match[1]
 
-    line = line.replace(/_([^_]+)_/, "_________")
+    blanks = '_'.repeat(answer.length)
+
+    line = line.replace(/_([^_]+)_/, blanks)
 
     flashcards.push(
       question: line,
@@ -58,7 +60,9 @@ generateFlashcards = (input) ->
     # get a random word from the line
     randomWord = words[Math.floor(Math.random() * words.length)]
 
-    line = line.replace(randomWord, "_________")
+    blanks = '_'.repeat(randomWord.length)
+
+    line = line.replace(randomWord, blanks)
 
     flashcards.push(
       question: line,
@@ -68,8 +72,6 @@ generateFlashcards = (input) ->
   return flashcards
 
 parseInputWithCapitalization = (input) ->
-  console.log "parsing input with capitalization"
-
   lines = input.split '\n'
 
   flashcards = []
@@ -81,7 +83,32 @@ parseInputWithCapitalization = (input) ->
 
     answer = match[1]
 
-    line = line.replace(/\b(([A-Z]+){2,})\b/, "_________")
+    blanks = '_'.repeat(answer.length)
+
+    line = line.replace(/\b(([A-Z]+){2,})\b/, blanks)
+
+    flashcards.push(
+      question: line,
+      answer: answer
+    )
+
+  return flashcards
+
+generateFlashcardsFromMarkdown = (input) ->
+  lines = input.split '\n'
+
+  flashcards = []
+
+  lines.forEach (line) ->
+    match = line.match(/\*\*([^*]+)\*\*/)
+
+    return unless match
+
+    answer = match[1]
+
+    blanks = '_'.repeat(answer.length)
+
+    line = line.replace(/\*\*([^*]+)\*\*/, blanks)
 
     flashcards.push(
       question: line,
@@ -100,14 +127,18 @@ shouldGenerateFlashcards = sessionStorage.getItem("generate-flashcards")
 
 useCapitalization = sessionStorage.getItem("use-capitalization-for-answers")
 
+fileIsMarkdown = sessionStorage.getItem("input-is-markdown")
+
 if shouldGenerateFlashcards is "true" and useCapitalization is "true"
   alert "something went wrong"
   window.location.href = 'index.html'
 
 if shouldGenerateFlashcards is "true"
-  flashcards = generateFlashcards(input)
+  flashcards = generateFlashcards input
+else if fileIsMarkdown is "true"
+  flashcards = generateFlashcardsFromMarkdown input
 else
-  flashcards = parseInput(input)
+  flashcards = parseInput input
 
 if useCapitalization is "true"
   flashcards = parseInputWithCapitalization(input)
@@ -149,7 +180,6 @@ handleFlippingFlashcard = ->
 
   flashcardAnswer = document.getElementById('flashcard-answer')
   flashcard = flashcards[iterator - 1]
-
 
   h3 = document.createElement('h3')
   h3.textContent = flashcard.answer
