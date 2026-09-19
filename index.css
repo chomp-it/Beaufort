@@ -33,3 +33,6 @@ input[type="checkbox"] {
 #input-file-instead {
   margin-bottom: 30px;
 }
+#submit {
+  scale: 1.1;
+}

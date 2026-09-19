@@ -17,6 +17,8 @@ moreOptionsDiv = document.getElementById('other-options')
 
 generateFlashcardsCheckbox = document.getElementById('generate-flashcards')
 
+useCapitalizationCheckbox = document.getElementById('use-capitalization-for-answers')
+
 # submitting a file instead of pasting text
 usingFileInstead = false
 
@@ -25,12 +27,17 @@ handleSubmitEvent = ->
     alert 'Your input is empty.'
     return
 
+  if generateFlashcardsCheckbox.checked and useCapitalizationCheckbox.checked
+    alert 'You cannot use capitalization for answers when generating flashcards.'
+    return
+
   if generateFlashcardsCheckbox.checked
-    console.log "setting flag as true"
     sessionStorage.setItem('generate-flashcards', 'true')
   else
-    console.log "setting flag as false"
     sessionStorage.setItem('generate-flashcards', 'false')
+
+  if useCapitalizationCheckbox.checked
+    sessionStorage.setItem('use-capitalization-for-answers', 'true')
 
   sessionStorage.setItem('input', rawTextField.value)
 
@@ -63,6 +70,7 @@ submitButton.addEventListener 'click', ->
 
 submitFileInstead.addEventListener 'click', ->
   handleFileSubmitting()
+
 
 fileInput.addEventListener 'change', (event)->
   files = event.target.files

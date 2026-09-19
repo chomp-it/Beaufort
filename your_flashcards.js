@@ -2,7 +2,7 @@
 (function() {
   var addNewDeckButton, addNewDeckInterface, flashcardsContainer, foundFlashcards, h3, handleAddingNewDeck;
 
-  flashcardsContainer = document.getElementById("flashcards-container");
+  flashcardsContainer = document.getElementById("your-flashcards-container");
 
   addNewDeckButton = document.getElementById("add-deck");
 
@@ -12,12 +12,17 @@
 
   if (!((foundFlashcards != null) && foundFlashcards.length > 0)) {
     h3 = document.createElement("h3");
+    h3.className = "psuedoparagraph";
     h3.innerHTML = "You don't have any saved flashcards yet. But you can add some!";
     flashcardsContainer.appendChild(h3);
   }
 
   handleAddingNewDeck = function() {
-    return addNewDeckInterface.style.display = "block";
+    if (addNewDeckInterface.style.display === "block") {
+      return addNewDeckInterface.style.display = "none";
+    } else {
+      return addNewDeckInterface.style.display = "block";
+    }
   };
 
   addNewDeckButton.addEventListener("click", function() {

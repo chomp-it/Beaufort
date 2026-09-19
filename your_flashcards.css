@@ -1,0 +1,33 @@
+h1,
+h2,
+h3 {
+  color: #d84c79;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+label,
+textarea,
+button {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+button:hover {
+  color: #d84c79;
+}
+a {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+a:hover {
+  color: #d84c79;
+}
+p,
+.psuedoparagraph {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+#everything {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#add-deck {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

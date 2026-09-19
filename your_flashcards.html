@@ -3,29 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <title>Your flashcards</title>
+
+    <link rel="stylesheet" href="your_flashcards.css">
 </head>
 <body>
 
-<div id="directory">
-    <nav>
-        <a href="index.html">Homepage</a>
-        <a href="your_flashcards.html">Your flashcards</a>
-    </nav>
+<div id="everything">
+    <div id="directory">
+        <nav>
+            <a href="index.html">Homepage</a>
+            <a href="your_flashcards.html">Your flashcards</a>
+        </nav>
+    </div>
+
+    <h1>
+        Your flashcards
+    </h1>
+
+    <div id="your-flashcards-container">
+    </div>
+
+    <button id="add-deck">Add a new flashcard deck</button>
+
+    <div id="add-deck-interface" style="display: none">
+        <h3>
+            Here's how this works:
+        </h3>
+
+        <p>
+            Instead of manually writing the question and the answer, <br>
+            provide the raw text and the flashcards will be generated for you. <br>
+            You can then use this deck anytime.
+        </p>
+
+        <label for="input" id="raw-input-label">Raw input:</label> <br>
+        <textarea id="input" rows="50" cols="65"></textarea>
+    </div>
+
 </div>
-
-<h2>
-  Your flashcards
-</h2>
-
-<div id="flashcards-container">
-</div>
-
-<div id="add-deck-interface" style="display: none">
-    <h1>Yeah, dude!</h1>
-</div>
-
-<button id="add-deck">Add a new flashcard deck</button>
-
 
 <script src="your_flashcards.js"></script>
 </body>

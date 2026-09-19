@@ -3,15 +3,23 @@ flashcardsDiv = document.getElementById('flashcards')
 flipFlashcard = document.getElementById('flip-flashcard')
 nextFlashcard = document.getElementById('next-flashcard')
 
+printedMessage = false
 
 printMessage = (message) ->
+  if printedMessage is true then return # don't stack messages on top of each other
+
   h3 = document.createElement('h3')
   h3.textContent = message
   h3.style = "display: flex; flex-direction: column; align-items: center"
 
   document.body.appendChild(h3)
 
-  setTimeout (-> document.body.removeChild(h3)), 3000
+  printedMessage = true
+
+  setTimeout (->
+    document.body.removeChild(h3)
+    printedMessage = false
+  ), 1500
 
 
 
@@ -37,13 +45,14 @@ parseInput = (input) ->
   return flashcards
 
 generateFlashcards = (input) ->
-  console.log "generating flashcards"
-
   lines = input.split '\n'
 
   flashcards = []
 
   lines.forEach (line) ->
+    # console.log "line:", line
+    if line == '' then return
+
     words = line.split(' ').filter (word) -> word.length > 3
 
     # get a random word from the line
@@ -58,6 +67,28 @@ generateFlashcards = (input) ->
 
   return flashcards
 
+parseInputWithCapitalization = (input) ->
+  console.log "parsing input with capitalization"
+
+  lines = input.split '\n'
+
+  flashcards = []
+
+  lines.forEach (line) ->
+    match = line.match(/\b(([A-Z]+){2,})\b/)
+
+    return unless match
+
+    answer = match[1]
+
+    line = line.replace(/\b(([A-Z]+){2,})\b/, "_________")
+
+    flashcards.push(
+      question: line,
+      answer: answer
+    )
+
+  return flashcards
 
 input = sessionStorage.getItem('input')
 
@@ -67,11 +98,19 @@ if input is null
 
 shouldGenerateFlashcards = sessionStorage.getItem("generate-flashcards")
 
+useCapitalization = sessionStorage.getItem("use-capitalization-for-answers")
+
+if shouldGenerateFlashcards is "true" and useCapitalization is "true"
+  alert "something went wrong"
+  window.location.href = 'index.html'
+
 if shouldGenerateFlashcards is "true"
   flashcards = generateFlashcards(input)
 else
   flashcards = parseInput(input)
 
+if useCapitalization is "true"
+  flashcards = parseInputWithCapitalization(input)
 
 if flashcards.length is 0
   printMessage 'No flashcards found'
