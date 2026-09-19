@@ -13,8 +13,11 @@ Third and finally, there's more than one way to do it. I designed Beaufort so yo
 As of right now, there are two ways to do it, with sub options for each of them:
 
 1. Raw text
+   
    For raw text, you can choose between two formats: `_answer_` or `ANSWER`. Beaufort accepts the first by default, but enabling the second is just a checkbox away.
-2. Files
+
+3. Files
+
    Beaufort also accepts .txt files, but .md (Markdown) support is right around the corner.
 
 It goes without saying, but Beaufort is 100% free and open source. No accounts, no sign ins of any kind, no registration. Something as simple as flashcards shouldn't be this hard. Beaufort makes them easy.
