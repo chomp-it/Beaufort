@@ -7,8 +7,29 @@ textarea,
 button {
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 }
+#directory {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 #everything {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+a {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+a:hover {
+  color: #d84c79;
+}
+button:hover {
+  color: #d84c79;
+}
+input[type="checkbox"] {
+  scale: 1.25;
+  margin: 8px;
+}
+#input-file-instead {
+  margin-bottom: 30px;
 }

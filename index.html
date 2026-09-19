@@ -8,6 +8,13 @@
 </head>
 <body>
 
+<div id="directory">
+    <nav>
+        <a href="index.html">Homepage</a>
+        <a href="your_flashcards.html">Your flashcards</a>
+    </nav>
+</div>
+
 <div id="everything">
     <h1>
         Copy and paste your raw input into the textbox below, and then press submit!
@@ -16,6 +23,16 @@
     <button id="input-file-instead">
         Actually, I want to use a file instead
     </button>
+
+    <button id="see-more-options">
+        See more options
+    </button>
+
+    <div id="other-options" style="display: none">
+        <label for="generate-flashcards">Create flashcards for me</label>
+        <input type="checkbox" id="generate-flashcards">
+    </div>
+
 
     <div id="file-input-container" style="display: none">
         <br>

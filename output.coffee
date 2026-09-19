@@ -12,7 +12,6 @@ printMessage = (message) ->
   document.body.appendChild(h3)
 
   setTimeout (-> document.body.removeChild(h3)), 3000
-  console.log "done"
 
 
 
@@ -28,8 +27,6 @@ parseInput = (input) ->
 
     answer = match[1]
 
-    console.log "answer:", answer
-
     line = line.replace(/_([^_]+)_/, "_________")
 
     flashcards.push(
@@ -39,22 +36,45 @@ parseInput = (input) ->
 
   return flashcards
 
+generateFlashcards = (input) ->
+  console.log "generating flashcards"
+
+  lines = input.split '\n'
+
+  flashcards = []
+
+  lines.forEach (line) ->
+    words = line.split(' ').filter (word) -> word.length > 3
+
+    # get a random word from the line
+    randomWord = words[Math.floor(Math.random() * words.length)]
+
+    line = line.replace(randomWord, "_________")
+
+    flashcards.push(
+      question: line,
+      answer: randomWord
+    )
+
+  return flashcards
+
+
 input = sessionStorage.getItem('input')
 
 if input is null
   printMessage 'No input found'
   return
 
-flashcards = parseInput(input)
+shouldGenerateFlashcards = sessionStorage.getItem("generate-flashcards")
+
+if shouldGenerateFlashcards is "true"
+  flashcards = generateFlashcards(input)
+else
+  flashcards = parseInput(input)
 
 
 if flashcards.length is 0
   printMessage 'No flashcards found'
-
-flashcards.forEach ((flashcard) ->
-  console.log flashcard.question
-  console.log flashcard.answer
-)
 
 iterator = 0
 
@@ -87,6 +107,7 @@ handleNextFlashcard = ->
 
 
 handleFlippingFlashcard = ->
+
   flashcardAnswer = document.getElementById('flashcard-answer')
   flashcard = flashcards[iterator - 1]
 
@@ -111,3 +132,4 @@ flipFlashcard.addEventListener 'click', ->
 
 nextFlashcard.click() # load the first flashcard automatically
 
+console.log "loaded"

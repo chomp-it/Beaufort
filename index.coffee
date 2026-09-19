@@ -11,6 +11,12 @@ rawTextFieldLabel = document.getElementById('raw-input-label')
 
 fileInput = document.getElementById('file-input')
 
+seeMoreOptionsButton = document.getElementById('see-more-options')
+
+moreOptionsDiv = document.getElementById('other-options')
+
+generateFlashcardsCheckbox = document.getElementById('generate-flashcards')
+
 # submitting a file instead of pasting text
 usingFileInstead = false
 
@@ -18,6 +24,13 @@ handleSubmitEvent = ->
   if rawTextField.value.length is 0
     alert 'Your input is empty.'
     return
+
+  if generateFlashcardsCheckbox.checked
+    console.log "setting flag as true"
+    sessionStorage.setItem('generate-flashcards', 'true')
+  else
+    console.log "setting flag as false"
+    sessionStorage.setItem('generate-flashcards', 'false')
 
   sessionStorage.setItem('input', rawTextField.value)
 
@@ -35,7 +48,6 @@ handleFileSubmitting = ->
 
     usingFileInstead = false
     return
-
 
   rawTextField.style.display = 'none'
   submitButton.style.display = 'none'
@@ -76,3 +88,17 @@ fileInput.addEventListener 'change', (event)->
 
   catch error
     alert 'There was an error reading the file.'
+
+seeMoreOptionsButton.addEventListener 'click', ->
+  if moreOptionsDiv.style.display is 'block'
+    seeMoreOptionsButton.style.marginBottom = '0px'
+    moreOptionsDiv.style.display = 'none'
+  else
+    seeMoreOptionsButton.style.marginBottom = '30px'
+    moreOptionsDiv.style.display = 'block'
+
+  if moreOptionsDiv.style.display is 'block'
+    seeMoreOptionsButton.innerText = 'See less options'
+  else
+    seeMoreOptionsButton.innerText = 'See more options'
+
