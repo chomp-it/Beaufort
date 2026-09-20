@@ -19,6 +19,8 @@ generateFlashcardsCheckbox = document.getElementById('generate-flashcards')
 
 useCapitalizationCheckbox = document.getElementById('use-capitalization-for-answers')
 
+useMarkdownCheckbox = document.getElementById('use-markdown')
+
 # submitting a file instead of pasting text
 usingFileInstead = false
 
@@ -27,8 +29,13 @@ handleSubmitEvent = ->
     alert 'Your input is empty.'
     return
 
+  # this conditional and the next just prevent the user from choosing conflicting options
   if generateFlashcardsCheckbox.checked and useCapitalizationCheckbox.checked
     alert 'You cannot use capitalization for answers when generating flashcards.'
+    return
+
+  if useMarkdownCheckbox.checked and (generateFlashcardsCheckbox.checked or useCapitalizationCheckbox.checked)
+    alert 'You have conflicting options selected.'
     return
 
   if generateFlashcardsCheckbox.checked
@@ -40,6 +47,14 @@ handleSubmitEvent = ->
     sessionStorage.setItem('use-capitalization-for-answers', 'true')
   else
     sessionStorage.setItem('use-capitalization-for-answers', 'false')
+
+  console.log "use markdown: #{useMarkdownCheckbox.checked}"
+
+  if useMarkdownCheckbox.checked
+    sessionStorage.setItem('use-markdown', 'true')
+  else
+    sessionStorage.setItem('use-markdown', 'false')
+
 
   sessionStorage.setItem('input', rawTextField.value)
 

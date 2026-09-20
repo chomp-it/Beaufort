@@ -117,6 +117,29 @@ generateFlashcardsFromMarkdown = (input) ->
 
   return flashcards
 
+parseInputWithMarkdown = (input) ->
+  lines = input.split '\n'
+
+  flashcards = []
+
+  lines.forEach (line) ->
+    match = line.match(/\*\*([^*]+)\*\*/)
+
+    return unless match
+
+    answer = match[1]
+
+    blanks = '_'.repeat(answer.length)
+
+    line = line.replace(/\*\*([^*]+)\*\*/, blanks)
+
+    flashcards.push(
+      question: line,
+      answer: answer
+    )
+
+  return flashcards
+
 input = sessionStorage.getItem('input')
 
 if input is null
@@ -129,6 +152,8 @@ useCapitalization = sessionStorage.getItem("use-capitalization-for-answers")
 
 fileIsMarkdown = sessionStorage.getItem("input-is-markdown")
 
+useMarkdown = sessionStorage.getItem("use-markdown")
+
 if shouldGenerateFlashcards is "true" and useCapitalization is "true"
   alert "something went wrong"
   window.location.href = 'index.html'
@@ -137,6 +162,8 @@ if shouldGenerateFlashcards is "true"
   flashcards = generateFlashcards input
 else if fileIsMarkdown is "true"
   flashcards = generateFlashcardsFromMarkdown input
+else if useMarkdown is "true"
+  flashcards = parseInputWithMarkdown input
 else
   flashcards = parseInput input
 
