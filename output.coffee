@@ -1,7 +1,8 @@
 
-flashcardsDiv = document.getElementById('flashcards')
-flipFlashcard = document.getElementById('flip-flashcard')
-nextFlashcard = document.getElementById('next-flashcard')
+flashcardsDiv     = document.getElementById('flashcards')
+flipFlashcard     = document.getElementById('flip-flashcard')
+nextFlashcard     = document.getElementById('next-flashcard')
+previousFlashcard = document.getElementById('previous-flashcard')
 
 printedMessage = false
 
@@ -52,7 +53,6 @@ generateFlashcards = (input) ->
   flashcards = []
 
   lines.forEach (line) ->
-    # console.log "line:", line
     if line == '' then return
 
     words = line.split(' ').filter (word) -> word.length > 3
@@ -146,25 +146,26 @@ if useCapitalization is "true"
 if flashcards.length is 0
   printMessage 'No flashcards found'
 
+
 iterator = 0
 
 handleNextFlashcard = ->
-  flashcardAnswer = document.getElementById('flashcard-answer')
-
-  flashcard = flashcards[iterator]
-
-  flashcardQuestion = document.getElementById('flashcard-question')
-
-  h3 = document.createElement('h3')
-
   if iterator is flashcards.length
     printMessage "That was your final flashcard."
     return
 
+  flashcardAnswer= document.getElementById('flashcard-answer')
+  flashcardQuestion = document.getElementById('flashcard-question')
+
+  flashcard = flashcards[iterator]
+
+  h3 = document.createElement('h3')
+
   h3.textContent = flashcard.question
   h3.id = 'flashcard-question'
 
-  # check if a flashcards is currently being displayed
+  # check if a flashcards is currently being displayed.
+  # if a flashcard isn't being displayed:
   if flashcardQuestion == null
     flashcardsDiv.appendChild(h3)
     flashcardsDiv.removeChild(flashcardAnswer) if flashcardAnswer
@@ -174,7 +175,6 @@ handleNextFlashcard = ->
   flashcardsDiv.replaceChild(h3, flashcardQuestion) # if the flashcard isn't the first flashcard
   flashcardsDiv.removeChild(flashcardAnswer) if flashcardAnswer # remove the answer
   iterator += 1
-
 
 handleFlippingFlashcard = ->
 
@@ -191,7 +191,25 @@ handleFlippingFlashcard = ->
 
   flashcardsDiv.replaceChild(h3, flashcardAnswer)
 
+handlePreviousFlashcard = ->
+  if iterator is 1
+    printMessage "You are on the first card of the deck."
+    return
 
+  # to offset the current flashcard -- the current flashcard is already offset by 1
+  flashcard = flashcards[iterator - 2]
+
+  flashcardQuestion = document.getElementById('flashcard-question')
+  flashcardAnswer= document.getElementById('flashcard-answer')
+
+  h3 = document.createElement('h3')
+  h3.textContent = flashcard.question
+  h3.id = 'flashcard-question'
+
+  flashcardsDiv.replaceChild(h3, flashcardQuestion)
+  flashcardsDiv.removeChild(flashcardAnswer) if flashcardAnswer
+
+  iterator -= 1
 
 nextFlashcard.addEventListener 'click', ->
   handleNextFlashcard()
@@ -199,6 +217,7 @@ nextFlashcard.addEventListener 'click', ->
 flipFlashcard.addEventListener 'click', ->
   handleFlippingFlashcard()
 
-nextFlashcard.click() # load the first flashcard automatically
+previousFlashcard.addEventListener 'click', ->
+  handlePreviousFlashcard()
 
-console.log "loaded"
+nextFlashcard.click() # load the first flashcard automatically

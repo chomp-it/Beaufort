@@ -43,6 +43,8 @@ handleSubmitEvent = ->
 
   sessionStorage.setItem('input', rawTextField.value)
 
+  sessionStorage.setItem('input-is-markdown', 'false')
+
   window.location.href='output.html'
 
 handleFileSubmitting = ->
@@ -96,6 +98,8 @@ fileInput.addEventListener 'change', (event)->
 
     if extension is 'md'
       sessionStorage.setItem('input-is-markdown', 'true')
+    else
+      sessionStorage.setItem('input-is-markdown', 'false')
 
     window.location.href='output.html'
 

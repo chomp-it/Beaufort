@@ -45,6 +45,7 @@
       sessionStorage.setItem('use-capitalization-for-answers', 'false');
     }
     sessionStorage.setItem('input', rawTextField.value);
+    sessionStorage.setItem('input-is-markdown', 'false');
     return window.location.href = 'output.html';
   };
 
@@ -92,6 +93,8 @@
       sessionStorage.setItem('input', fileContents);
       if (extension === 'md') {
         sessionStorage.setItem('input-is-markdown', 'true');
+      } else {
+        sessionStorage.setItem('input-is-markdown', 'false');
       }
       return window.location.href = 'output.html';
     } catch (error1) {
