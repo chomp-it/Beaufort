@@ -3,6 +3,7 @@ flashcardsDiv     = document.getElementById('flashcards')
 flipFlashcard     = document.getElementById('flip-flashcard')
 nextFlashcard     = document.getElementById('next-flashcard')
 previousFlashcard = document.getElementById('previous-flashcard')
+flashcardNumber   = document.getElementById('flashcard-number')
 
 printedMessage = false
 
@@ -202,6 +203,7 @@ handleNextFlashcard = ->
   flashcardsDiv.replaceChild(h3, flashcardQuestion) # if the flashcard isn't the first flashcard
   flashcardsDiv.removeChild(flashcardAnswer) if flashcardAnswer # remove the answer
   iterator += 1
+  flashcardNumber.textContent = iterator
 
 handleFlippingFlashcard = ->
 
@@ -237,6 +239,7 @@ handlePreviousFlashcard = ->
   flashcardsDiv.removeChild(flashcardAnswer) if flashcardAnswer
 
   iterator -= 1
+  flashcardNumber.textContent = iterator
 
 nextFlashcard.addEventListener 'click', ->
   handleNextFlashcard()

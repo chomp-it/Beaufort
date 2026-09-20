@@ -17,3 +17,9 @@ button {
   flex-direction: column;
   align-items: center;
 }
+a:hover {
+  color: #d84c79;
+}
+button:hover {
+  color: #d84c79;
+}
