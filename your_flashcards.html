@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your flashcards</title>
+
+    <link rel="stylesheet" href="your_flashcards.css">
+</head>
+<body>
+
+<div id="everything">
+    <div id="directory">
+        <nav>
+            <a href="index.html">Homepage</a>
+            <a href="your_flashcards.html">Your flashcards</a>
+        </nav>
+    </div>
+
+    <h1>
+        Your flashcards
+    </h1>
+
+    <div id="your-flashcards-container">
+    </div>
+
+    <button id="add-deck">Add a new flashcard deck</button>
+
+    <div id="add-deck-interface" style="display: none">
+        <h3>
+            Here's how this works:
+        </h3>
+
+        <p>
+            Instead of manually writing the question and the answer, <br>
+            provide the raw text and the flashcards will be generated for you. <br>
+            You can then use this deck anytime.
+
+            <br>
+            <br>
+
+            Of course, you can also choose these options like the normal input:
+        </p>
+
+        <label for="use-capitalization-for-answers">Use ANSWER instead of _answer_</label>
+        <input type="checkbox" id="use-capitalization-for-answers">
+
+        <br>
+        <br>
+
+        <label for="use-markdown-for-answers">Use markdown (**answer** instead of _answer_)</label>
+        <input type="checkbox" id="use-markdown-for-answers">
+
+        <br>
+        <br>
+
+        <label for="input" id="raw-input-label">Raw input:</label> <br>
+        <textarea id="input" rows="50" cols="65"></textarea>
+
+        <br>
+        <br>
+
+        <button id="save-deck">Save</button>
+    </div>
+
+</div>
+
+<script src="your_flashcards.js"></script>
+</body>
+</html>

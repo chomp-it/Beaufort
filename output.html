@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your flashcards</title>
+
+    <link rel="stylesheet" href="output.css">
+</head>
+<body>
+
+<div id="everything">
+    <button onclick="window.location.href='index.html'">Back to homepage</button>
+
+    <h2>
+        Your flashcards:
+    </h2>
+
+    <h3 id="flashcard-number">
+        1
+    </h3>
+
+    <div id="content-container">
+
+        <div id="flashcards">
+        </div>
+
+        <button id="flip-flashcard">Flip flashcard/see answer</button>
+
+        <button id="next-flashcard">Next flashcard</button>
+
+        <button id="previous-flashcard">Go back a flashcard</button>
+
+        <button id="save-to-your-flashcards">Save this deck to your flashcards</button>
+    </div>
+
+    <!--This displays when you click "Save this deck to your flashcards"-->
+    <div id="save-flashcard-interface" style="display: none">
+        <br>
+        <label for="deck-name">What name do you want to save this deck under?</label>
+
+        <br>
+
+        <input type="text" id="deck-name">
+
+        <br>
+        <br>
+        <button id="save-deck">Save</button>
+    </div>
+</div>
+
+<script src="output.js"></script>
+
+</body>
+</html>
