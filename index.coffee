@@ -24,7 +24,9 @@ handleSubmitEvent = ->
     return
 
   unless thisCanBeParsed $('input').value
-    alert_return "This input will not generate any flashcards."
+    unless $('generate-flashcards').checked
+      alert_return "This input will not generate any flashcards."
+      return
 
   # this conditional and the next just prevent the user from choosing conflicting options
   if $('generate-flashcards').checked and $('use-capitalization-for-answers').checked
