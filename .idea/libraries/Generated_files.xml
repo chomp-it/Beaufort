@@ -8,9 +8,9 @@
       </sourceFilesUrls>
     </properties>
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/index.js" />
-      <root url="file://$PROJECT_DIR$/output.js" />
-      <root url="file://$PROJECT_DIR$/your_flashcards.js" />
+      <root url="file://$PROJECT_DIR$/scripts/index.js" />
+      <root url="file://$PROJECT_DIR$/scripts/output.js" />
+      <root url="file://$PROJECT_DIR$/scripts/your_flashcards.js" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
